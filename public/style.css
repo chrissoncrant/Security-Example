@@ -75,6 +75,7 @@ p {
     width: 85%;
     border: 2px solid #CDC3DB;
     border-radius: 6px;
+    background-color: #73ff81;
 }
 
 .inner-border {
@@ -93,7 +94,7 @@ p {
 
 .poly-box {
     height: 259px;
-    padding-top: 30px;
+    padding-top: 35px;
     width: 280px;
     margin: 0 auto 30px;
     background-image: url(./images/Heptagon.svg);
@@ -141,5 +142,5 @@ p {
 }
 
 .btn-2 {
-    margin: 30px auto;
+    margin: 24px auto;
 }
