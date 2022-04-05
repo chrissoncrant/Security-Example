@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 require('dotenv').config(); 
+const cookieSession = require('cookie-session');
 
 const express = require('express');
 
@@ -12,7 +13,9 @@ const PORT = 3000;
 
 const config = {
     CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-    CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET
+    CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    COOKIE_KEY_1: process.env.COOKIE_KEY_1,
+    COOKIE_KEY_2: process.env.COOKIE_KEY_2
 }
 
 const AUTH_OPTIONS = {
@@ -28,13 +31,42 @@ function verifyCallback(accessToken, refreshToken, profile, done) {
 
 passport.use(new GoogleStrategy(AUTH_OPTIONS, verifyCallback));
 
+//Saving the session to the cookie:
+passport.serializeUser((user, done) => {
+    //This sets the value of the cookie:
+    console.log("Serialized")
+    done(null, user.id);
+})
+
+//Reading session from the cookie:
+passport.deserializeUser((id, done) => {
+    //The obj will populate the req.user property in Express:
+    console.log('Deserialized', id);
+    done(null, id);
+})
+
 const app = express();
 
 app.use(helmet());
+
+//This allows for storing session data in a cookie
+app.use(cookieSession({
+    name: 'session',
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [ config.COOKIE_KEY_1, config.COOKIE_KEY_2 ]
+}));
+
 app.use(passport.initialize());
 
+app.use(passport.session());
+app.use((req, res, next) => {
+    console.log('Request', req.session);
+    next();
+}); 
+
 function checkLoggedIn(req, res, next) {
-    const isLoggedIn = true //TODO
+    console.log('User', req.user)
+    const isLoggedIn = req.isAuthenticated() && req.user 
     if (!isLoggedIn) {
         return res.status(401).json({
             error: "You must log in!"
@@ -56,7 +88,7 @@ app.get('/auth/google/callback',
     passport.authenticate('google', {
         failureRedirect: '/failure',
         successRedirect: '/',
-        session: false,
+        session: true,
     }), 
     (req, res) => {
         console.log('Google called us back');
@@ -65,7 +97,9 @@ app.get('/auth/google/callback',
 
 //How a user logs out
 app.get('/auth/logout', (req, res) => {
-
+    //This passport logout function removes the req.user property and clears any logged in sessions
+    req.logout();
+    return res.redirect('/');
 });
 
 app.get('/secret', checkLoggedIn, (req, res) => {
@@ -75,6 +109,7 @@ app.get('/secret', checkLoggedIn, (req, res) => {
 app.get('/failure', (req, res) => {
     res.send("Failed to log in.")
 })
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
