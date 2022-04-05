@@ -75,6 +75,8 @@ function checkLoggedIn(req, res, next) {
     next();
 }
 
+app.use(express.static(path.join(__dirname, 'public')))
+
 //This is where a user is taken when they click login:
 app.get('/auth/google',
     passport.authenticate('google', {

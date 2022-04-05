@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto+Slab:wght@400;700&display=swap');
+
+:root {
+    --black: black;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #9CFAA6;
+    display: flex;
+}
+
+img, picture, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+h1, h2, h3, h4 {
+    line-height: 1.1;
+}
+
+h1 {
+    font-family: 'Righteous', cursive;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+h1, 
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    overflow-wrap: break-word;
+    max-width: 65ch;
+    color: #202A25;
+}
+
+/* Not useful to me now, but will be when I start using React */
+/* 
+#root, #__next {
+    isolation: isolate;
+} */
+
+.bd {
+    border: 1px solid black;
+}
+
+.outer-border {
+    margin: auto;
+    padding: 3px;
+    width: 85%;
+    border: 2px solid #CDC3DB;
+    border-radius: 6px;
+}
+
+.inner-border {
+    border: 2px solid #CDC3DB;
+    border-radius: 6px;
+    padding: 25px 0;
+    margin: 3px;
+}
+
+.main-container {
+    
+    border: 3px solid #FCF7EA;
+    border-radius: 6px;
+    
+}
+
+.poly-box {
+    height: 259px;
+    padding-top: 30px;
+    width: 280px;
+    margin: 0 auto 30px;
+    background-image: url(./images/Heptagon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.words {
+    width: 150px;
+    text-align: center;
+    margin: auto;
+}
+
+h4 {
+    margin-bottom: 20px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 21px;
+}
+
+p {
+    font-family: 'Roboto Slab', serif;
+    line-height: 1.5;
+    width: 125px;
+    display: block;
+    margin: auto;
+}
+
+.btn-1, .btn-2 {
+    border: 3px solid #392A7E;
+    color: #392A7E;
+    text-decoration: none;
+    padding: 5px 20px;
+    display: block;
+    width:fit-content;
+    border-radius: 6px;
+    background: linear-gradient(270deg, #5F4BB6 -105.83%, #FCF7EA 50.27%, #5F4BB6 211.67%);
+}
+
+.btn-1 {
+    color: #FCF7EA;
+    border-color: #FCF7EA;
+    background: linear-gradient(181.11deg, #FCF7EA -117.35%, #5F4BB6 99.05%);
+    margin: auto;
+}
+
+.btn-2 {
+    margin: 30px auto;
+}

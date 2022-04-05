@@ -8,18 +8,29 @@
     <!-- Style Sheet Reset, if needed
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css">
     -->
-    <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+    <link href="./style.css" rel="stylesheet" type="text/css">
     <!-- Favicon 
     <link rel="icon" type="image/jpg" href="images/Favicon_Image_Location"/>
     -->
     <!-- <script src="script.js" defer></script> -->
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>Welcome to the security example.</p>
-    <p>Click below to reveal your secret.</p>
-    <a href="/secret">Show me!</a>
-    <a href="/auth/google">Google login</a>
-    <a href="/auth/logout">Logout</a>
+    <div class="outer-border">
+        <div class="main-container">
+            <div class="inner-border">
+                <h1>Super Secret Server</h1>
+                <div class="poly-box">
+                    <div class="words">
+                        <h4>Welcome.</h4>
+                        <p>The secret of life awaits you. To access, simply log in below.</p>
+                    </div>
+                </div>
+                <a class="btn-1" href="/auth/google">Google login</a>
+                <a class="btn-2" href="/secret">Show me!</a>
+                <a class="btn-1" href="/auth/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
