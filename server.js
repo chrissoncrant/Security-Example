@@ -68,14 +68,15 @@ function checkLoggedIn(req, res, next) {
     console.log('User', req.user)
     const isLoggedIn = req.isAuthenticated() && req.user 
     if (!isLoggedIn) {
-        return res.status(401).json({
-            error: "You must log in!"
-        })
+        // return res.status(401).json({
+        //     error: "You must log in!"
+        // })
+        return res.status(401).sendFile(path.join(__dirname, 'failure', 'failure.html'));
     };
     next();
 }
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 
 //This is where a user is taken when they click login:
 app.get('/auth/google',
@@ -109,7 +110,9 @@ app.get('/secret', checkLoggedIn, (req, res) => {
 })
 
 app.get('/failure', (req, res) => {
-    res.send("Failed to log in.")
+    res.status(401).json({
+        error: 'You have failed to log in.'
+    })
 })
 
 
